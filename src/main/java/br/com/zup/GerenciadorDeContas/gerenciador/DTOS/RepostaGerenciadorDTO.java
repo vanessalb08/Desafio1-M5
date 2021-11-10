@@ -1,7 +1,7 @@
 package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 
-import br.com.zup.GerenciadorDeContas.gerenciador.Status;
-import br.com.zup.GerenciadorDeContas.gerenciador.Tipo;
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
