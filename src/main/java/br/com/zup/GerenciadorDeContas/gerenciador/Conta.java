@@ -1,5 +1,8 @@
 package br.com.zup.GerenciadorDeContas.gerenciador;
 
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

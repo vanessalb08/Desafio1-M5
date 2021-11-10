@@ -6,7 +6,7 @@ import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class RepostaDTO {
+public class RepostaGerenciadorDTO {
     private int id;
     private String nome;
     private double valor;
@@ -15,7 +15,7 @@ public class RepostaDTO {
     private LocalDateTime dataDePagamento;
     private Status status;
 
-    public RepostaDTO() {
+    public RepostaGerenciadorDTO() {
     }
 
     public int getId() {
