@@ -1,15 +1,29 @@
 package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
-import java.time.LocalDate;
 
-public class RequisicaoGerenciadorDTO {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public class SaidaContaDTO {
+    private int id;
     private String nome;
     private double valor;
     private Tipo tipo;
     private LocalDate dataDeVencimento;
+    private LocalDateTime dataDePagamento;
+    private Status status;
 
-    public RequisicaoGerenciadorDTO() {
+    public SaidaContaDTO() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -42,5 +56,21 @@ public class RequisicaoGerenciadorDTO {
 
     public void setDataDeVencimento(LocalDate dataDeVencimento) {
         this.dataDeVencimento = dataDeVencimento;
+    }
+
+    public LocalDateTime getDataDePagamento() {
+        return dataDePagamento;
+    }
+
+    public void setDataDePagamento(LocalDateTime dataDePagamento) {
+        this.dataDePagamento = dataDePagamento;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

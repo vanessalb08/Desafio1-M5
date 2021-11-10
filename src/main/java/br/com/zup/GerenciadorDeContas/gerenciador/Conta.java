@@ -18,10 +18,12 @@ public class Conta {
     @Column(nullable = false)
     private double valor;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private LocalDate dataDeVencimento;
     private LocalDateTime dataDePagamento;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Conta() {
