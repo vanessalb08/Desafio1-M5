@@ -1,19 +1,19 @@
 package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
-import com.sun.istack.NotNull;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ContaDTO {
     @Size(min = 2, message = "Nome menor que o permitido")
     private String nome;
-    @DecimalMin(value = "0,01", message = "Valor menor que o permitido")
+    @DecimalMin(value = "0.01", message = "Valor menor que o permitido")
     private double valor;
     private Tipo tipo;
-    @NotNull
+    @NotNull(message = "Essa campo não pode ser vazio")
     private LocalDate dataDeVencimento;
 
     public ContaDTO() {
