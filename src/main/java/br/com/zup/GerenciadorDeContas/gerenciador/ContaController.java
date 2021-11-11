@@ -20,10 +20,8 @@ public class ContaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaContaDTO salvarConta (@RequestBody EntradaContaDTO entradaContaDTO){
-        SaidaContaDTO saidaContaDTO = contaService.retornarSaida(entradaContaDTO);
-        Conta conta = modelMapper.map(saidaContaDTO, Conta.class);
-
-        contaService.salvarConta(conta);
+        Conta conta = modelMapper.map(entradaContaDTO, Conta.class);
+        SaidaContaDTO saidaContaDTO = modelMapper.map(contaService.salvarConta(conta),SaidaContaDTO.class);
 
         return saidaContaDTO;
     }

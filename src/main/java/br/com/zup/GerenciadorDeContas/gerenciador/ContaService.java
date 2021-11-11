@@ -19,21 +19,16 @@ public class ContaService {
     private ModelMapper modelMapper;
 
     public Conta salvarConta(Conta conta){
+        verificarData(conta);
         return contaRepository.save(conta);
     }
 
-    public SaidaContaDTO retornarSaida (EntradaContaDTO entradaContaDTO){
-        SaidaContaDTO saidaContaDTO = modelMapper.map(entradaContaDTO, SaidaContaDTO.class);
-        verificarData(entradaContaDTO,saidaContaDTO);
-
-        return saidaContaDTO;
-    }
-    public void verificarData (EntradaContaDTO entradaContaDTO, SaidaContaDTO saidaContaDTO){
-        if (entradaContaDTO.getDataDeVencimento().isBefore(LocalDate.now())){
-            saidaContaDTO.setStatus(Status.VENCIDA);
+    public void verificarData (Conta conta){
+        if (conta.getDataDeVencimento().isBefore(LocalDate.now())){
+            conta.setStatus(Status.VENCIDA);
         }
         else{
-            saidaContaDTO.setStatus(Status.AGUARDANDO);
+            conta.setStatus(Status.AGUARDANDO);
         }
 
     }
