@@ -26,4 +26,16 @@ public class ControllerAdvice {
 
         return errosDeValidacao;
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MensagemErro tratarExcecaoDeEnumInvalido(HttpMessageNotReadableException exception){
+        if (exception.getLocalizedMessage().contains("br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo")) {
+            return new MensagemErro("Tipo não reconhecido");
+        }
+        else if (exception.getLocalizedMessage().contains("br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status")){
+            return new MensagemErro("Status não reconhecido");
+        }
+        return new MensagemErro(exception.getLocalizedMessage());
+    }
 }
