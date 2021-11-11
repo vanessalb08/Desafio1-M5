@@ -44,6 +44,13 @@ public class ContaController {
         return contaResumoDTOS;
     }
 
+    @GetMapping("/{id}")
+    public ContaSaidaDTO exibirContaPorId(@PathVariable int id){
+        ContaSaidaDTO contaSaidaDTO = modelMapper.map(contaService.buscarConta(id),ContaSaidaDTO.class);
+
+        return contaSaidaDTO;
+    }
+
     @PutMapping("/{id}")
     public ContaSaidaDTO atualizarConta (@PathVariable int id, @RequestBody AtualizarContaDTO atualizarContaDTO){
         ContaSaidaDTO contaSaidaDTO;
