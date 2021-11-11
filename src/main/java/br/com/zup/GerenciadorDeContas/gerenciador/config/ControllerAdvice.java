@@ -1,2 +1,29 @@
-package br.com.zup.GerenciadorDeContas.gerenciador.config;public class ControllerAdvice {
+package br.com.zup.GerenciadorDeContas.gerenciador.config;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RestControllerAdvice
+public class ControllerAdvice {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public List<MensagemErro> tratarErrosDeValidacao(MethodArgumentNotValidException exception){
+        List<MensagemErro> errosDeValidacao = new ArrayList<>();
+
+        for (FieldError fieldError: exception.getFieldErrors()){
+            MensagemErro mensagemErro = new MensagemErro(fieldError.getDefaultMessage());
+            errosDeValidacao.add(mensagemErro);
+        }
+
+        return errosDeValidacao;
+    }
 }
