@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ContaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ContaSaidaDTO cadastrarConta (@RequestBody ContaDTO ContaDTO){
+    public ContaSaidaDTO cadastrarConta (@RequestBody @Valid ContaDTO ContaDTO){
         Conta conta = modelMapper.map(ContaDTO, Conta.class);
         ContaSaidaDTO contaSaidaDTO = modelMapper.map(contaService.salvarConta(conta), ContaSaidaDTO.class);
 
@@ -35,7 +36,7 @@ public class ContaController {
     @GetMapping
     public List<ContaResumoDTO> exibirContas(){
         List<ContaResumoDTO> contaResumoDTOS = new ArrayList<>();
-        for(Conta contaReferencia : contaService.retornatTodasAsContas()){
+        for(Conta contaReferencia : contaService.retornarTodasAsContas()){
             ContaResumoDTO contaResumoDTO = modelMapper.map(contaReferencia,ContaResumoDTO.class);
             contaResumoDTOS.add(contaResumoDTO);
         }
@@ -49,9 +50,7 @@ public class ContaController {
             contaSaidaDTO = modelMapper.map(contaService.atualizarConta(id), ContaSaidaDTO.class);
             return contaSaidaDTO;
         }
-        else{
-             return contaSaidaDTO = modelMapper.map(contaService.buscarConta(id), ContaSaidaDTO.class);
-        }
+        throw new RuntimeException("Status inválido");
 
     }
 

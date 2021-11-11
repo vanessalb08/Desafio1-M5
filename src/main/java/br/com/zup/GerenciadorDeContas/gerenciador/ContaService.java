@@ -53,7 +53,7 @@ public class ContaService {
         return contaParaAtualizar;
     }
 
-    public List<Conta> retornatTodasAsContas(){
+    public List<Conta> retornarTodasAsContas(){
         Iterable<Conta> contas = contaRepository.findAll();
         return (List<Conta>) contas;
     }

@@ -5,7 +5,7 @@ import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
 
 public class ContaResumoDTO {
     private int id;
-    private Tipo tipo;
+    private String nome;
     private double valor;
     private Status status;
 
@@ -20,12 +20,12 @@ public class ContaResumoDTO {
         this.id = id;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getValor() {
