@@ -1,13 +1,13 @@
 package br.com.zup.GerenciadorDeContas.gerenciador;
 
-import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.EntradaContaDTO;
-import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.SaidaContaDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class ContaService {
@@ -31,5 +31,24 @@ public class ContaService {
             conta.setStatus(Status.AGUARDANDO);
         }
 
+    }
+
+    public Conta buscarConta(int id){
+        for (Conta contaReferencia : contaRepository.findAll()){
+            if (contaReferencia.getId() == id){
+                return contaReferencia;
+            }
+        }
+        throw new RuntimeException("Conta não encontrada");
+    }
+
+    public Conta atualizarConta(int id){
+        Conta contaParaAtualizar = buscarConta(id);
+        contaParaAtualizar.setStatus(Status.PAGO);
+        contaParaAtualizar.setDataDePagamento(LocalDateTime.now());
+
+        contaRepository.save(contaParaAtualizar);
+
+        return contaParaAtualizar;
     }
 }

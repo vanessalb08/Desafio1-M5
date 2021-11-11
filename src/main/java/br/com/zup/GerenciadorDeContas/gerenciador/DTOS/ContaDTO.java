@@ -3,13 +3,13 @@ package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
 import java.time.LocalDate;
 
-public class EntradaContaDTO {
+public class ContaDTO {
     private String nome;
     private double valor;
     private Tipo tipo;
     private LocalDate dataDeVencimento;
 
-    public EntradaContaDTO() {
+    public ContaDTO() {
     }
 
     public String getNome() {

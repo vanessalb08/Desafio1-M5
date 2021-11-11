@@ -1,7 +1,9 @@
 package br.com.zup.GerenciadorDeContas.gerenciador;
 
-import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.EntradaContaDTO;
-import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.SaidaContaDTO;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.AtualizarContaDTO;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaDTO;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaSaidaDTO;
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +21,24 @@ public class ContaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SaidaContaDTO salvarConta (@RequestBody EntradaContaDTO entradaContaDTO){
-        Conta conta = modelMapper.map(entradaContaDTO, Conta.class);
-        SaidaContaDTO saidaContaDTO = modelMapper.map(contaService.salvarConta(conta),SaidaContaDTO.class);
+    public ContaSaidaDTO cadastrarConta (@RequestBody ContaDTO ContaDTO){
+        Conta conta = modelMapper.map(ContaDTO, Conta.class);
+        ContaSaidaDTO contaSaidaDTO = modelMapper.map(contaService.salvarConta(conta), ContaSaidaDTO.class);
 
-        return saidaContaDTO;
+        return contaSaidaDTO;
+    }
+
+    @PutMapping("/{id}")
+    public ContaSaidaDTO atualizarConta (@PathVariable int id, @RequestBody AtualizarContaDTO atualizarContaDTO){
+        ContaSaidaDTO contaSaidaDTO;
+        if (atualizarContaDTO.getStatus().equals(Status.PAGO)){
+            contaSaidaDTO = modelMapper.map(contaService.atualizarConta(id), ContaSaidaDTO.class);
+            return contaSaidaDTO;
+        }
+        else{
+             return contaSaidaDTO = modelMapper.map(contaService.buscarConta(id), ContaSaidaDTO.class);
+        }
+
     }
 
 }
