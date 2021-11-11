@@ -5,6 +5,7 @@ import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaResumoDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaSaidaDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
 import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.StatusInvalidoException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,10 @@ public class ContaController {
     }
 
     @GetMapping
-    public List<ContaResumoDTO> exibirContas(@RequestParam(required = false) Status status){
+    public List<ContaResumoDTO> exibirContas(@RequestParam(required = false) Status status,
+                                             @RequestParam(required = false) Tipo tipo){
         List<ContaResumoDTO> contaResumoDTOS = new ArrayList<>();
-        for(Conta contaReferencia : contaService.retornarTodasAsContas(status)){
+        for(Conta contaReferencia : contaService.retornarTodasAsContas(status, tipo)){
             ContaResumoDTO contaResumoDTO = modelMapper.map(contaReferencia,ContaResumoDTO.class);
             contaResumoDTOS.add(contaResumoDTO);
         }

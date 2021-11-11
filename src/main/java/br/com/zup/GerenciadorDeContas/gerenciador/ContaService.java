@@ -1,6 +1,7 @@
 package br.com.zup.GerenciadorDeContas.gerenciador;
 
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo;
 import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.ContaNaoEncontradaException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,12 @@ public class ContaService {
         return contaParaAtualizar;
     }
 
-    public List<Conta> retornarTodasAsContas(Status status){
+    public List<Conta> retornarTodasAsContas(Status status, Tipo tipo){
         if (status != null){
             return contaRepository.findAllByStatus(status);
+        }
+        else if (tipo != null){
+            return contaRepository.findAllByTipo(tipo);
         }
         Iterable<Conta> contas = contaRepository.findAll();
         return (List<Conta>) contas;
