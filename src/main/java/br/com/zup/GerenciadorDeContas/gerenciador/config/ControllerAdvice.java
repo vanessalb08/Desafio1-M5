@@ -50,7 +50,7 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public MensagemErro tratarErroDeFiltro(MethodArgumentTypeMismatchException exception){
         return new MensagemErro("Filtro inválido!");
     }
