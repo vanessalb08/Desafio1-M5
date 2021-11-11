@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ContaService {
@@ -50,5 +51,10 @@ public class ContaService {
         contaRepository.save(contaParaAtualizar);
 
         return contaParaAtualizar;
+    }
+
+    public List<Conta> retornatTodasAsContas(){
+        Iterable<Conta> contas = contaRepository.findAll();
+        return (List<Conta>) contas;
     }
 }
