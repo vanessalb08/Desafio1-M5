@@ -5,6 +5,7 @@ import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaResumoDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaSaidaDTO;
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.StatusInvalidoException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,7 @@ public class ContaController {
             contaSaidaDTO = modelMapper.map(contaService.atualizarConta(id), ContaSaidaDTO.class);
             return contaSaidaDTO;
         }
-        throw new RuntimeException("Status inválido");
+        throw new StatusInvalidoException("Status inválido!");
 
     }
 

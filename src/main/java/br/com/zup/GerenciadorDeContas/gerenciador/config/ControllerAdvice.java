@@ -1,5 +1,6 @@
 package br.com.zup.GerenciadorDeContas.gerenciador.config;
 
+import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.StatusInvalidoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -30,12 +31,13 @@ public class ControllerAdvice {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public MensagemErro tratarExcecaoDeEnumInvalido(HttpMessageNotReadableException exception){
-        if (exception.getLocalizedMessage().contains("br.com.zup.GerenciadorDeContas.gerenciador.enuns.Tipo")) {
-            return new MensagemErro("Tipo não reconhecido");
-        }
-        else if (exception.getLocalizedMessage().contains("br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status")){
-            return new MensagemErro("Status não reconhecido");
-        }
-        return new MensagemErro(exception.getLocalizedMessage());
+
+        return new MensagemErro("Enum não reconhecido");
+    }
+
+    @ExceptionHandler(StatusInvalidoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MensagemErro StatusInvalidoException(StatusInvalidoException exception){
+        return new MensagemErro(exception.getMessage());
     }
 }
