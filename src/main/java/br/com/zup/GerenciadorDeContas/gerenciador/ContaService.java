@@ -1,6 +1,7 @@
 package br.com.zup.GerenciadorDeContas.gerenciador;
 
 import br.com.zup.GerenciadorDeContas.gerenciador.enuns.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.ContaNaoEncontradaException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class ContaService {
                 return contaReferencia;
             }
         }
-        throw new RuntimeException("Conta não encontrada");
+        throw new ContaNaoEncontradaException("Conta não encontrada");
     }
 
     public Conta atualizarConta(int id){

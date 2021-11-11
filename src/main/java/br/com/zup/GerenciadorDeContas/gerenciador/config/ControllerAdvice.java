@@ -1,5 +1,6 @@
 package br.com.zup.GerenciadorDeContas.gerenciador.config;
 
+import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.ContaNaoEncontradaException;
 import br.com.zup.GerenciadorDeContas.gerenciador.excessoes.StatusInvalidoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -37,7 +38,13 @@ public class ControllerAdvice {
 
     @ExceptionHandler(StatusInvalidoException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MensagemErro StatusInvalidoException(StatusInvalidoException exception){
+    public MensagemErro tratarStatusInvalidoException(StatusInvalidoException exception){
+        return new MensagemErro(exception.getMessage());
+    }
+
+    @ExceptionHandler(ContaNaoEncontradaException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemErro tratarContaNaoEncontrada(ContaNaoEncontradaException exception){
         return new MensagemErro(exception.getMessage());
     }
 }
