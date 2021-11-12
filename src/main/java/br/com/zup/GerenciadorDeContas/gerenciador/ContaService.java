@@ -54,12 +54,15 @@ public class ContaService {
         return contaParaAtualizar;
     }
 
-    public List<Conta> retornarTodasAsContas(Status status, Tipo tipo){
+    public List<Conta> retornarTodasAsContas(Status status, Tipo tipo, Double valor){
         if (status != null){
             return contaRepository.findAllByStatus(status);
         }
         else if (tipo != null){
             return contaRepository.findAllByTipo(tipo);
+        }
+        else if (valor != null){
+            return contaRepository.findAllByValorBetween(valor);
         }
         Iterable<Conta> contas = contaRepository.findAll();
         return (List<Conta>) contas;
